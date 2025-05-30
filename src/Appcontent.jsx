@@ -38,14 +38,12 @@ function AppContent() {
     }
   }, [error]);
 
-  // If you want the background pattern to be directly defined here (instead of bg-pattern-light class)
-  // const backgroundPattern = `bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%226366f1%22%20fill-opacity=%220.03%22%3E%3Ccircle%20cx=%227%22%20cy=%227%22%20r=%221%22/%3E%3Ccircle%20cx=%2252%22%20cy=%227%22%20r=%221%22/%3E%3Ccircle%20cx=%227%22%20cy=%2252%22%20r=%221%22/%3E%3Ccircle%20cx=%2252%22%20cy=%2252%22%20r=%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22f8fafc%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%227%22%20cy=%227%22%20r=%221%22/%3E%3Ccircle%20cx=%2252%22%20cy=%227%22%20r=%221%22/%3E%3Ccircle%20cx=%227%22%20cy=%2252%22%20r=%221%22/%3E%3Ccircle%20cx=%2252%22%20cy=%2252%22%20r=%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')];
-  // And use it like: <div className={`absolute inset-0 z-0 ${backgroundPattern}`}></div>
-
   return (
-    <div className={`relative min-h-screen ${isDark ? 'dark' : 'light'}`}>
-      {/* Background Pattern - assuming bg-pattern-light is defined in global CSS with dark variants */}
-      <div className="absolute inset-0 z-0 bg-pattern-light"></div>
+    // The 'dark' class is dynamically added/removed to the <html> element by ThemeContext
+    // No need for ${isDark ? 'dark' : 'light'} on this div.
+    <div className="relative min-h-screen">
+      {/* Background Pattern - Tailwind will handle dark:bg-pattern-dark based on <html> 'dark' class */}
+      <div className="absolute inset-0 z-0 bg-pattern-light dark:bg-pattern-dark"></div>
 
       {/* Content Container */}
       <div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 py-6">
@@ -57,7 +55,7 @@ function AppContent() {
               <div className="p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg">
                 <Cloud className="w-8 h-8 text-blue-500 dark:text-blue-400" />
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-400">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
                 Weather App
               </h1>
             </div>
@@ -115,7 +113,7 @@ function AppContent() {
 
       {/* Toast Container for notifications */}
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop

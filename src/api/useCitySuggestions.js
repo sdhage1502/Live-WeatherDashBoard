@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 
-const API_KEY = '2127ab3228dfa393b06afb6960bf4780'; // Replace with your API key
+const API_KEY = import.meta.env.VITE_API_KEY
 const API_URL = 'https://api.openweathermap.org/geo/1.0/direct';
 
 export function useCitySuggestions(query, limit = 5) {

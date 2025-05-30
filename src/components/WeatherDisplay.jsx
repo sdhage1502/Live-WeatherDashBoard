@@ -34,7 +34,7 @@ function WeatherDisplay({ weather }) {
 
   if (!weather) {
     return (
-      <Card variant="glass" className="p-8">
+      <Card variant="default" className="p-8">
         <div className="text-center text-slate-500 dark:text-slate-800">
           <Cloud className="w-16 h-16 mx-auto mb-4 opacity-50" />
           <p className="text-lg font-medium">Search for a city to see weather</p>
