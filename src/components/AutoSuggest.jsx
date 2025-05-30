@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Clock, MapPin, X } from 'lucide-react';
 import { useCitySuggestions } from '../api/useCitySuggestions';
-import Card from './common/Card'; // Keep this import
+import Card from './common/Card';
 
 const AutoSuggest = ({ onSelect }) => {
   const [inputValue, setInputValue] = useState('');
@@ -105,12 +105,7 @@ const AutoSuggest = ({ onSelect }) => {
               </button>
             )}
           </div>
-          <button
-            type="submit"
-            className="p-2 hover:bg-slate-700 rounded-lg transition-colors text-slate-300"
-          >
-            <Search className="w-5 h-5" />
-          </button>
+          {/* Removed the right side search icon button */}
         </form>
 
         {/* Suggestions Dropdown */}
