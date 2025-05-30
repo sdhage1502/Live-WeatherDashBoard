@@ -102,4 +102,4 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-Created by [Your Name] — feel free to reach out at [sdhage1502@gmail.com]
+Created by Shreyash Dhage — feel free to reach out at [sdhage1502@gmail.com]
