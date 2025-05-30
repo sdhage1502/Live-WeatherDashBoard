@@ -1,15 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeather } from './context/WeatherContext';
-import { useTheme } from './context/ThemeContext';
 import AutoSuggest from './components/AutoSuggest';
 import WeatherDisplay from './components/WeatherDisplay';
 import ForecastDisplay from './components/ForecastDisplay';
-import Button from './components/common/Button';
 import {
-  Sun as SunIcon,
-  Moon as MoonIcon,
-  Thermometer as ThermometerIcon,
   Cloud,
 } from 'lucide-react';
 
@@ -20,11 +15,10 @@ function AppContent() {
     loading,
     error,
     fetchWeatherByCity,
-    toggleUnit,
     unit,
   } = useWeather();
 
-  const { toggleTheme, isDark } = useTheme();
+  // Removed toggleTheme and isDark from useTheme since we only have dark theme now
 
   const handleCitySelect = useCallback(
     (city) => {
@@ -32,7 +26,7 @@ function AppContent() {
       toast.success(`Weather data loaded for ${city}`, {
         icon: '🌤️',
         className:
-          'backdrop-blur-sm rounded-xl bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-white',
+          'backdrop-blur-sm rounded-xl bg-slate-800/80 text-white',
       });
     },
     [fetchWeatherByCity]
@@ -48,14 +42,13 @@ function AppContent() {
   useEffect(() => {
     if (error) {
       toast.error(`Failed to load weather data: ${error}`, {
-        className:
-          'backdrop-blur-sm rounded-xl bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-white',
+        className: 'backdrop-blur-sm rounded-xl bg-slate-800/80 text-white',
       });
     }
   }, [error]);
 
   return (
-    <div className="relative min-h-screen bg-pattern-light dark:bg-pattern-dark transition-colors duration-500">
+    <div className="relative min-h-screen bg-pattern-dark transition-colors duration-500">
       {/* Overlay background pattern */}
       <div className="absolute inset-0 z-0" />
 
@@ -66,10 +59,10 @@ function AppContent() {
           <header className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
             {/* Branding */}
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg">
-                <Cloud className="w-8 h-8 text-blue-500 dark:text-blue-400" />
+              <div className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg">
+                <Cloud className="w-8 h-8 text-blue-400" />
               </div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-slate-100">
+              <h1 className="text-4xl lg:text-5xl font-bold text-slate-100">
                 Weather App
               </h1>
             </div>
@@ -83,9 +76,9 @@ function AppContent() {
           {/* Loading Indicator */}
           {loading && (
             <div className="flex items-center justify-center py-12" aria-live="polite">
-              <div className="flex items-center gap-3 px-6 py-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg">
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 dark:border-blue-400 border-t-transparent"></div>
-                <span className="text-slate-600 dark:text-slate-300 font-medium">
+              <div className="flex items-center gap-3 px-6 py-3 bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg">
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-400 border-t-transparent"></div>
+                <span className="text-slate-300 font-medium">
                   Loading weather data...
                 </span>
               </div>
@@ -113,8 +106,8 @@ function AppContent() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme={isDark ? 'dark' : 'light'}
-        toastClassName="backdrop-blur-sm rounded-xl bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-white"
+        theme="dark"
+        toastClassName="backdrop-blur-sm rounded-xl bg-slate-800/80 text-white"
         style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
       />
     </div>
