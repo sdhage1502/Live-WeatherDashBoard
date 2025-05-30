@@ -1,4 +1,3 @@
-// ForecastDisplay.jsx
 import { Sun, Cloud, CloudRain, Snowflake, Calendar } from 'lucide-react';
 import Card from './common/Card'; // Keep this import
 // import { useWeather } from '../context/WeatherContext'; // Keep commented out if not used
@@ -33,16 +32,15 @@ const getDailyForecasts = (list) => {
   list.forEach((item) => {
     const date = new Date(item.dt * 1000).toLocaleDateString('en-US');
     const hour = new Date(item.dt * 1000).getHours();
-    // Prioritize mid-day forecast for the daily summary
     if (!daily[date] || (hour >= 11 && hour <= 13)) {
       daily[date] = item;
     }
   });
-  return Object.values(daily).slice(0, 5); // Ensure we only get 5 days
+  return Object.values(daily).slice(0, 5);
 };
 
 function ForecastDisplay({ forecast }) {
-  // const { unit } = useWeather(); // Uncomment if you need 'unit' here
+  // const { unit } = useWeather();
 
   if (!forecast?.list) return null;
 
@@ -52,7 +50,7 @@ function ForecastDisplay({ forecast }) {
     <Card variant="glass" className="p-6">
       <div className="flex items-center gap-2 mb-6">
         <Calendar className="w-5 h-5 text-blue-500" />
-        <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+        <h2 className="text-xl font-semibold dark:text-slate-200">
           5-Day Forecast
         </h2>
       </div>
@@ -65,9 +63,9 @@ function ForecastDisplay({ forecast }) {
           return (
             <div
               key={index}
-              className="bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/70 dark:hover:bg-slate-700/70 transition-all duration-200 hover:scale-105"
+              className="dark:bg-slate-700/50 backdrop-blur-sm rounded-xl p-4 text-center dark:hover:bg-slate-700/70 transition-all duration-200 hover:scale-105"
             >
-              <p className="text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+              <p className="text-sm font-medium dark:text-slate-300 mb-2">
                 {isToday ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' })}
               </p>
 
@@ -76,16 +74,15 @@ function ForecastDisplay({ forecast }) {
               </div>
 
               <div className="mb-2">
-                <p className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                <p className="text-xl font-bold dark:text-slate-100">
                   {Math.round(item.main.temp)}°
-                  {/* If you wanted to display unit here: {Math.round(item.main.temp)}°{unit === 'metric' ? 'C' : 'F'} */}
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs dark:text-slate-400">
                   {Math.round(item.main.temp_min)}° / {Math.round(item.main.temp_max)}°
                 </p>
               </div>
 
-              <p className="text-xs capitalize text-slate-600 dark:text-slate-300 leading-tight">
+              <p className="text-xs capitalize dark:text-slate-300 leading-tight">
                 {item.weather[0].description}
               </p>
 
