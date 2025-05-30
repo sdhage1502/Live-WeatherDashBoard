@@ -89,18 +89,17 @@ const AutoSuggest = ({ onSelect }) => {
               }}
               onBlur={() => {
                 setIsFocused(false);
-                // A small delay to allow click on suggestion before hiding
                 setTimeout(() => setShowSuggestions(false), 150);
               }}
               placeholder="Search for a city..."
-              className="flex-1 py-2 px-1 bg-transparent text-slate-700 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none text-lg"
+              className="flex-1 py-2 px-1 bg-transparent text-slate-200 placeholder-slate-500 focus:outline-none text-lg"
               autoComplete="off"
             />
             {inputValue && (
               <button
                 type="button"
                 onClick={clearInput}
-                className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors"
+                className="p-1 hover:bg-slate-700 rounded-full transition-colors"
               >
                 <X className="w-4 h-4 text-slate-400" />
               </button>
@@ -108,7 +107,7 @@ const AutoSuggest = ({ onSelect }) => {
           </div>
           <button
             type="submit"
-            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-slate-600 dark:text-slate-300"
+            className="p-2 hover:bg-slate-700 rounded-lg transition-colors text-slate-300"
           >
             <Search className="w-5 h-5" />
           </button>
@@ -121,7 +120,7 @@ const AutoSuggest = ({ onSelect }) => {
               {/* Loading State */}
               {loading && inputValue && (
                 <div className="p-4 text-center">
-                  <div className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                  <div className="inline-flex items-center gap-2 text-slate-400">
                     <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-500 border-t-transparent"></div>
                     Searching...
                   </div>
@@ -131,7 +130,7 @@ const AutoSuggest = ({ onSelect }) => {
               {/* Recent Cities */}
               {!inputValue && lastCities.length > 0 && (
                 <div className="p-2">
-                  <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400">
+                  <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-400">
                     <Clock className="w-4 h-4" />
                     Recent searches
                   </div>
@@ -139,15 +138,15 @@ const AutoSuggest = ({ onSelect }) => {
                     <button
                       key={idx}
                       onClick={() => handleLastCityClick(city)}
-                      className="w-full flex items-center justify-between px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors group"
+                      className="w-full flex items-center justify-between px-3 py-2 hover:bg-slate-700 rounded-lg transition-colors group"
                     >
                       <div className="flex items-center gap-3">
                         <MapPin className="w-4 h-4 text-slate-400" />
-                        <span className="text-slate-700 dark:text-slate-200">{city}</span>
+                        <span className="text-slate-200">{city}</span>
                       </div>
                       <button
                         onClick={(e) => removeLastCity(city, e)}
-                        className="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-600 rounded transition-all"
+                        className="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-600 rounded transition-all"
                       >
                         <X className="w-3 h-3 text-slate-400" />
                       </button>
@@ -159,7 +158,7 @@ const AutoSuggest = ({ onSelect }) => {
               {/* City Suggestions */}
               {!loading && inputValue && suggestions.length > 0 && (
                 <div className="p-2">
-                  <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400">
+                  <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-400">
                     <Search className="w-4 h-4" />
                     Search results
                   </div>
@@ -167,14 +166,14 @@ const AutoSuggest = ({ onSelect }) => {
                     <button
                       key={`${city.name}-${index}`}
                       onClick={() => handleSuggestionClick(city)}
-                      className="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-left"
+                      className="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-700 rounded-lg transition-colors text-left"
                     >
                       <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
                       <div>
-                        <div className="text-slate-700 dark:text-slate-200 font-medium">
+                        <div className="text-slate-200 font-medium">
                           {city.name}
                         </div>
-                        <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="text-sm text-slate-400">
                           {city.state ? `${city.state}, ` : ''}{city.country}
                         </div>
                       </div>
@@ -185,7 +184,7 @@ const AutoSuggest = ({ onSelect }) => {
 
               {/* No Results */}
               {!loading && inputValue && suggestions.length === 0 && (
-                <div className="p-4 text-center text-slate-500 dark:text-slate-400">
+                <div className="p-4 text-center text-slate-400">
                   <MapPin className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p>No cities found</p>
                   <p className="text-sm">Try a different search term</p>
@@ -199,7 +198,7 @@ const AutoSuggest = ({ onSelect }) => {
       {/* Quick Access Cities (when not focused) */}
       {!isFocused && lastCities.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          <span className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
+          <span className="text-sm text-slate-400 flex items-center gap-1">
             <Clock className="w-3 h-3" />
             Recent:
           </span>
@@ -207,7 +206,7 @@ const AutoSuggest = ({ onSelect }) => {
             <button
               key={idx}
               onClick={() => handleLastCityClick(city)}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-white/60 dark:bg-slate-700/60 backdrop-blur-sm rounded-full text-sm text-slate-600 dark:text-slate-300 hover:bg-white/80 dark:hover:bg-slate-700/80 transition-all hover:scale-105"
+              className="inline-flex items-center gap-1 px-3 py-1 bg-slate-700/60 backdrop-blur-sm rounded-full text-sm text-slate-300 hover:bg-slate-700/80 transition-all hover:scale-105"
             >
               <MapPin className="w-3 h-3" />
               {city}
