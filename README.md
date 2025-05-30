@@ -5,11 +5,12 @@
 
 The Weather App is a responsive web application that provides real-time weather information for cities around the world. Users can search for a city and instantly get detailed weather data such as temperature, humidity, wind speed, and weather conditions. The app offers recent search suggestions, smooth UI animations, and supports both desktop and mobile views.
 
+
 ---
 
 ## Tech Stack
 
-- **Frontend:** React.js (with functional components and hooks)  
+- **Frontend:** Vite , React.js (with functional components and hooks)  
 - **Styling:** Tailwind CSS for modern, responsive design  
 - **Icons:** Lucide React for clean SVG icons  
 - **State Management:** React useState and useEffect hooks  
@@ -64,7 +65,7 @@ The Weather App is a responsive web application that provides real-time weather 
    npm start
    ```
 
-   This will start the app on `http://localhost:3000`.
+   This will start the app on `http://localhost:5173`.
 
 ---
 
