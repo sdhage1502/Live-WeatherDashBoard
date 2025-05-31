@@ -1,10 +1,10 @@
-// AutoSuggest.jsx
+// SearchBar.jsx
 import React, { useState, useEffect } from 'react';
 import { Search, Clock, MapPin, X } from 'lucide-react';
 import { useCitySuggestions } from '../api/useCitySuggestions';
-import Card from './common/Card';
+import Card from './Card'; // Assuming Card.jsx is in the same directory or correctly aliased
 
-const AutoSuggest = ({ onSelect }) => {
+const SearchBar = ({ onSelect }) => {
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [lastCities, setLastCities] = useState([]);
@@ -92,7 +92,7 @@ const AutoSuggest = ({ onSelect }) => {
                 setTimeout(() => setShowSuggestions(false), 150);
               }}
               placeholder="Search for a city..."
-              className="flex-1 py-2 px-1 bg-transparent text-slate-200 placeholder-slate-500 focus:outline-none text-lg"
+              className="flex-1 py-2 px-1  text-slate-200 placeholder-slate-500 focus:outline-none text-lg"
               autoComplete="off"
             />
             {inputValue && (
@@ -111,12 +111,12 @@ const AutoSuggest = ({ onSelect }) => {
         {/* Suggestions Dropdown */}
         {showSuggestions && (inputValue.length > 0 || lastCities.length > 0) && (
           <div className="absolute top-full left-0 right-0 mt-2 z-10">
-            <Card variant="glass" className="max-h-80 overflow-y-auto">
+            <Card variant="solid" className="max-h-80 overflow-y-auto p-2"> 
               {/* Loading State */}
               {loading && inputValue && (
                 <div className="p-4 text-center">
-                  <div className="inline-flex items-center gap-2 text-slate-400">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-500 border-t-transparent"></div>
+                  <div className="inline-flex items-center gap-2 text-slate-400 ">
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-500 border-t-transparent " ></div>
                     Searching...
                   </div>
                 </div>
@@ -124,57 +124,62 @@ const AutoSuggest = ({ onSelect }) => {
 
               {/* Recent Cities */}
               {!inputValue && lastCities.length > 0 && (
-                <div className="p-2">
-                  <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-400">
+                <> {/* Use fragment to group header and list */}
+                  <div className="flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase text-slate-400 border-b border-slate-700/50 mb-2"> {/* Improved header style */}
                     <Clock className="w-4 h-4" />
                     Recent searches
                   </div>
-                  {lastCities.map((city, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleLastCityClick(city)}
-                      className="w-full flex items-center justify-between px-3 py-2 hover:bg-slate-700 rounded-lg transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <MapPin className="w-4 h-4 text-slate-400" />
-                        <span className="text-slate-200">{city}</span>
-                      </div>
+                  <div className="space-y-1"> {/* Added space-y for list items */}
+                    {lastCities.map((city, idx) => (
                       <button
-                        onClick={(e) => removeLastCity(city, e)}
-                        className="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-600 rounded transition-all"
+                        key={idx}
+                        onClick={() => handleLastCityClick(city)}
+                        className="w-full flex items-center justify-between px-3 py-2 hover:bg-slate-700 rounded-lg transition-colors group text-left" // Added text-left for consistency
                       >
-                        <X className="w-3 h-3 text-slate-400" />
+                        <div className="flex items-center gap-3">
+                          <MapPin className="w-4 h-4 text-slate-400" />
+                          <span className="text-slate-200">{city}</span>
+                        </div>
+                        <button
+                          onClick={(e) => removeLastCity(city, e)}
+                          className="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-600 rounded transition-all"
+                        >
+                          <X className="w-3 h-3 text-slate-400" />
+                        </button>
                       </button>
-                    </button>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                  {suggestions.length > 0 && <hr className="my-2 border-slate-700/30" />} {/* Divider if suggestions follow */}
+                </>
               )}
 
               {/* City Suggestions */}
               {!loading && inputValue && suggestions.length > 0 && (
-                <div className="p-2">
-                  <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-400">
+                <> {/* Use fragment to group header and list */}
+                  <div className="flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase text-slate-400 border-b border-slate-700/50 mb-2"> {/* Improved header style */}
                     <Search className="w-4 h-4" />
                     Search results
                   </div>
-                  {suggestions.map((city, index) => (
-                    <button
-                      key={`${city.name}-${index}`}
-                      onClick={() => handleSuggestionClick(city)}
-                      className="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-700 rounded-lg transition-colors text-left"
-                    >
-                      <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                      <div>
-                        <div className="text-slate-200 font-medium">
-                          {city.name}
+                  <div className="space-y-1"> {/* Added space-y for list items */}
+                    {suggestions.map((city, index) => (
+                      <button
+                        key={`${city.name}-${index}`}
+                        onClick={() => handleSuggestionClick(city)}
+                        className="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-700 rounded-lg transition-colors text-left"
+                      >
+                        <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
+                        <div>
+                          <div className="text-slate-200 font-medium">
+                            {city.name}
+                          </div>
+                          <div className="text-sm text-slate-400">
+                            {city.state ? `${city.state}, ` : ''}{city.country}
+                          </div>
                         </div>
-                        <div className="text-sm text-slate-400">
-                          {city.state ? `${city.state}, ` : ''}{city.country}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                      </button>
+                    ))}
+                  </div>
+                </>
               )}
 
               {/* No Results */}
@@ -213,4 +218,4 @@ const AutoSuggest = ({ onSelect }) => {
   );
 };
 
-export default AutoSuggest;
+export default SearchBar;

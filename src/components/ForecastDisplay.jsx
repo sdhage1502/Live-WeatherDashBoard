@@ -1,5 +1,5 @@
 import { Sun, Cloud, CloudRain, Snowflake, Calendar } from 'lucide-react';
-import Card from './common/Card'; // Keep this import
+import Card from './Card'; // Keep this import
 // import { useWeather } from '../context/WeatherContext'; // Keep commented out if not used
 
 const getWeatherIcon = (code, size = 'md') => {

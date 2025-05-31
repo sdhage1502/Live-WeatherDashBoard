@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeather } from './context/WeatherContext';
-import AutoSuggest from './components/AutoSuggest';
+import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import ForecastDisplay from './components/ForecastDisplay';
 import {
@@ -15,10 +15,9 @@ function AppContent() {
     loading,
     error,
     fetchWeatherByCity,
-    unit,
+ 
   } = useWeather();
 
-  // Removed toggleTheme and isDark from useTheme since we only have dark theme now
 
   const handleCitySelect = useCallback(
     (city) => {
@@ -70,7 +69,7 @@ function AppContent() {
 
           {/* Search Field */}
           <div className="mb-8">
-            <AutoSuggest onSelect={handleCitySelect} />
+            <SearchBar onSelect={handleCitySelect} />
           </div>
 
           {/* Loading Indicator */}
@@ -99,16 +98,14 @@ function AppContent() {
       <ToastContainer
         position="top-center"
         autoClose={3000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         newestOnTop
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
-        pauseOnHover
-        theme="dark"
-        toastClassName="backdrop-blur-sm rounded-xl bg-slate-800/80 text-white"
-        style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+        theme="theme"
+
       />
     </div>
   );
