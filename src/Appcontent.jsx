@@ -49,7 +49,7 @@ function AppContent() {
   return (
     <div className="relative min-h-screen bg-pattern-dark transition-colors duration-500">
       {/* Overlay background pattern */}
-      <div className="absolute inset-0 z-0" />
+      <div className="absolute inset-0 z-0 bg-gray-800" />
 
       {/* Main Content */}
       <div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 py-6">
