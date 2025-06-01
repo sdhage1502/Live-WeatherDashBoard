@@ -1,7 +1,5 @@
 import { Sun, Cloud, CloudRain, Snowflake, Calendar } from 'lucide-react';
-import Card from './Card'; // Keep this import
-// import { useWeather } from '../context/WeatherContext'; // Keep commented out if not used
-
+import Card from './Card';
 const getWeatherIcon = (code, size = 'md') => {
   const sizeClasses = {
     sm: 'w-5 h-5',
@@ -40,7 +38,6 @@ const getDailyForecasts = (list) => {
 };
 
 function ForecastDisplay({ forecast }) {
-  // const { unit } = useWeather();
 
   if (!forecast?.list) return null;
 

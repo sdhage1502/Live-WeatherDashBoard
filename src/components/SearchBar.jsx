@@ -1,9 +1,8 @@
-// SearchBar.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Search, Clock, MapPin, X } from 'lucide-react';
 import { useCitySuggestions } from '../api/useCitySuggestions';
-import Card from './Card'; // Assuming Card.jsx is in the same directory or correctly aliased
-
+import Card from './Card'; 
 const SearchBar = ({ onSelect }) => {
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -105,7 +104,7 @@ const SearchBar = ({ onSelect }) => {
               </button>
             )}
           </div>
-          {/* Removed the right side search icon button */}
+  
         </form>
 
         {/* Suggestions Dropdown */}
@@ -149,18 +148,18 @@ const SearchBar = ({ onSelect }) => {
                       </button>
                     ))}
                   </div>
-                  {suggestions.length > 0 && <hr className="my-2 border-slate-700/30" />} {/* Divider if suggestions follow */}
+                  {suggestions.length > 0 && <hr className="my-2 border-slate-700/30" />} 
                 </>
               )}
 
               {/* City Suggestions */}
               {!loading && inputValue && suggestions.length > 0 && (
-                <> {/* Use fragment to group header and list */}
+                <> 
                   <div className="flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase text-slate-400 border-b border-slate-700/50 mb-2"> {/* Improved header style */}
                     <Search className="w-4 h-4" />
                     Search results
                   </div>
-                  <div className="space-y-1"> {/* Added space-y for list items */}
+                  <div className="space-y-1"> 
                     {suggestions.map((city, index) => (
                       <button
                         key={`${city.name}-${index}`}
