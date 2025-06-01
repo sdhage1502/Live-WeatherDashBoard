@@ -92,7 +92,7 @@ const SearchBar = ({ onSelect }) => {
                 setTimeout(() => setShowSuggestions(false), 150);
               }}
               placeholder="Search for a city..."
-              className="flex-1 py-2 px-1  text-slate-200 placeholder-slate-500 focus:outline-none text-lg"
+              className="flex-1 py-2 px-1 bg-transparent text-slate-200 placeholder-slate-500 focus:outline-none text-lg"
               autoComplete="off"
             />
             {inputValue && (

@@ -35,7 +35,7 @@ function WeatherDisplay({ weather }) {
   if (!weather) {
     return (
       <Card variant="default" className="p-8">
-        <div className="text-center text-slate-500 dark:text-slate-800">
+        <div className="text-center text-slate-500">
           <Cloud className="w-16 h-16 mx-auto mb-4 opacity-50" />
           <p className="text-lg font-medium">Search for a city to see weather</p>
         </div>
@@ -59,26 +59,26 @@ function WeatherDisplay({ weather }) {
 
           <div className="text-center sm:text-left flex-grow">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-              <MapPin className="w-5 h-5 text-slate-500 dark:text-slate-400" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">
+              <MapPin className="w-5 h-5 text-slate-400" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-100">
                 {name}
               </h2>
             </div>
 
             <div className="mb-3">
-              <span className="text-5xl sm:text-6xl font-light text-slate-800 dark:text-slate-100">
+              <span className="text-5xl sm:text-6xl font-light text-slate-100">
                 {temperature}°
               </span>
-              <span className="text-2xl text-slate-500 dark:text-slate-400 ml-1">
+              <span className="text-2xl text-slate-400 ml-1">
                 {unit === 'metric' ? 'C' : 'F'}
               </span>
             </div>
 
-            <p className="text-lg capitalize text-slate-600 dark:text-slate-300 mb-2">
+            <p className="text-lg capitalize text-slate-300 mb-2">
               {weatherDetails[0].description}
             </p>
 
-            <p className="text-slate-500 dark:text-slate-400 flex items-center justify-center sm:justify-start gap-1">
+            <p className="text-slate-400 flex items-center justify-center sm:justify-start gap-1">
               <Thermometer className="w-4 h-4" />
               Feels like {feelsLike}°{unit === 'metric' ? 'C' : 'F'}
             </p>
@@ -88,7 +88,7 @@ function WeatherDisplay({ weather }) {
 
       {/* Weather Details Card */}
       <Card variant="glass" className="p-6">
-        <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4">
+        <h3 className="text-lg font-semibold text-slate-200 mb-4">
           Details
         </h3>
 
@@ -96,9 +96,9 @@ function WeatherDisplay({ weather }) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Droplets className="w-4 h-4 text-blue-500" />
-              <span className="text-slate-600 dark:text-slate-300">Humidity</span>
+              <span className="text-slate-300">Humidity</span>
             </div>
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
+            <span className="font-semibold text-slate-200">
               {main.humidity}%
             </span>
           </div>
@@ -106,9 +106,9 @@ function WeatherDisplay({ weather }) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Gauge className="w-4 h-4 text-slate-500" />
-              <span className="text-slate-600 dark:text-slate-300">Pressure</span>
+              <span className="text-slate-300">Pressure</span>
             </div>
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
+            <span className="font-semibold text-slate-200">
               {main.pressure} hPa
             </span>
           </div>
@@ -117,9 +117,9 @@ function WeatherDisplay({ weather }) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Wind className="w-4 h-4 text-slate-400" />
-                <span className="text-slate-600 dark:text-slate-300">Wind</span>
+                <span className="text-slate-300">Wind</span>
               </div>
-              <span className="font-semibold text-slate-800 dark:text-slate-200">
+              <span className="font-semibold text-slate-200">
                 {Math.round(wind.speed)} {unit === 'metric' ? 'm/s' : 'mph'}
               </span>
             </div>
@@ -129,9 +129,9 @@ function WeatherDisplay({ weather }) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Eye className="w-4 h-4 text-slate-400" />
-                <span className="text-slate-600 dark:text-slate-300">Visibility</span>
+                <span className="text-slate-300">Visibility</span>
               </div>
-              <span className="font-semibold text-slate-800 dark:text-slate-200">
+              <span className="font-semibold text-slate-200">
                 {Math.round(visibility / 1000)} km
               </span>
             </div>
