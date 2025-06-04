@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Search, Clock, MapPin, X } from 'lucide-react';
 import { useCitySuggestions } from '../api/useCitySuggestions';

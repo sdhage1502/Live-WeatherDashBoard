@@ -1,5 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { getCurrentWeather, getForecast } from '../api/weatherApi';
 import { toast } from 'react-toastify';

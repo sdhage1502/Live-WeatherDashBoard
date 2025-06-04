@@ -1,6 +1,6 @@
-// WeatherDisplay.jsx
+
 import { Sun, Cloud, CloudRain, Snowflake, MapPin, Thermometer, Droplets, Wind, Eye, Gauge } from 'lucide-react';
-import Card from './Card'; // Keep this import
+import Card from './Card'; 
 import { useWeather } from '../context/WeatherContext';
 
 const getWeatherIcon = (weatherCode, size = 'lg') => {

@@ -1,9 +1,11 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useWeather } from './context/WeatherContext';
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import ForecastDisplay from './components/ForecastDisplay';
+import WeatherAISummary, { WeatherAssistantButton } from './components/WeatherAISummary';
+
 import {
   Cloud,
 } from 'lucide-react';
@@ -15,9 +17,9 @@ function AppContent() {
     loading,
     error,
     fetchWeatherByCity,
- 
   } = useWeather();
 
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
 
   const handleCitySelect = useCallback(
     (city) => {
@@ -65,6 +67,11 @@ function AppContent() {
                 Weather App
               </h1>
             </div>
+
+            {/* AI Assistant Button */}
+            {weather && forecast && (
+              <WeatherAssistantButton onClick={() => setIsAIModalOpen(true)} />
+            )}
           </header>
 
           {/* Search Field */}
@@ -94,6 +101,12 @@ function AppContent() {
         </div>
       </div>
 
+      {/* AI Assistant Modal */}
+      <WeatherAISummary 
+        isOpen={isAIModalOpen} 
+        onClose={() => setIsAIModalOpen(false)} 
+      />
+
       {/* Toast Notifications */}
       <ToastContainer
         position="top-center"
@@ -105,7 +118,6 @@ function AppContent() {
         pauseOnFocusLoss
         draggable
         theme="theme"
-
       />
     </div>
   );
