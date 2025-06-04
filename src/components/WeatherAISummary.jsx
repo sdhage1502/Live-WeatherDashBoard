@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { useWeather } from '../context/WeatherContext';
 import { generateWeatherSummary } from '../api/aiSummary';
-import { 
-  MessageCircle, 
+import {
+  MessageCircle,
   X,
   Sun,
   Umbrella,
@@ -26,7 +26,6 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [summaryType, setSummaryType] = useState(null);
 
-  // Smart question generation (secondary feature)
   const smartQuestions = useMemo(() => {
     if (!weather || !forecast) return [];
 
@@ -35,7 +34,7 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
     const windSpeed = weather.wind?.speed || 0;
     const condition = weather.weather?.[0]?.main?.toLowerCase() || '';
     const city = weather.name || 'your area';
-    
+
     const questions = [
       {
         id: 'sunscreen',
@@ -150,8 +149,6 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl shadow-2xl border border-slate-600/50 w-full max-w-2xl max-h-[90vh] overflow-hidden">
-        
-        {/* Header */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-6">
           <button
             onClick={onClose}
@@ -159,7 +156,7 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
           >
             <X className="w-5 h-5 text-white" />
           </button>
-          
+
           <div className="flex items-center gap-4">
             <div className="p-3 bg-white/20 rounded-2xl">
               <MessageCircle className="w-8 h-8 text-white" />
@@ -173,89 +170,82 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Content */}
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
-          
           {activeSection === 'summaries' && (
             <div className="space-y-6">
-              {/* Main Summary Options */}
               <div>
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                   <Eye className="w-6 h-6 text-blue-400" />
                   Weather Summaries
                 </h3>
-                
+
                 <div className="grid gap-4 mb-8">
-                  {/* Today's Summary */}
                   <button
                     onClick={() => handleSummaryGenerate('today')}
-                    className="group flex items-center gap-4 p-6 bg-gradient-to-r from-blue-600/20 to-blue-700/30 hover:from-blue-600/30 hover:to-blue-700/40 rounded-2xl transition-all duration-300 border border-blue-500/30 hover:border-blue-400/50 text-left hover:scale-[1.02]"
+                    className="group flex items-center gap-4 p-4 sm:p-6 bg-gradient-to-r from-blue-600/20 to-blue-700/30 hover:from-blue-600/30 hover:to-blue-700/40 rounded-2xl transition-all duration-300 border border-blue-500/30 hover:border-blue-400/50 text-left hover:scale-[1.02]"
                   >
-                    <div className="p-4 bg-blue-500/30 rounded-2xl group-hover:scale-110 transition-transform">
-                      <Clock className="w-8 h-8 text-blue-300" />
+                    <div className="p-3 sm:p-4 bg-blue-500/30 rounded-2xl group-hover:scale-110 transition-transform">
+                      <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-xl font-bold text-white group-hover:text-blue-200 transition-colors mb-2">
+                      <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-200 transition-colors mb-1 sm:mb-2">
                         Today's Weather Summary
                       </h4>
-                      <p className="text-blue-200 text-sm">
+                      <p className="text-blue-200 text-xs sm:text-sm">
                         Complete overview of current conditions, hourly forecast, and what to expect today
                       </p>
                     </div>
-                    <TrendingUp className="w-6 h-6 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:translate-x-1 transition-transform" />
                   </button>
 
-                  {/* 5-Day Summary */}
                   <button
                     onClick={() => handleSummaryGenerate('forecast')}
-                    className="group flex items-center gap-4 p-6 bg-gradient-to-r from-green-600/20 to-green-700/30 hover:from-green-600/30 hover:to-green-700/40 rounded-2xl transition-all duration-300 border border-green-500/30 hover:border-green-400/50 text-left hover:scale-[1.02]"
+                    className="group flex items-center gap-4 p-4 sm:p-6 bg-gradient-to-r from-green-600/20 to-green-700/30 hover:from-green-600/30 hover:to-green-700/40 rounded-2xl transition-all duration-300 border border-green-500/30 hover:border-green-400/50 text-left hover:scale-[1.02]"
                   >
-                    <div className="p-4 bg-green-500/30 rounded-2xl group-hover:scale-110 transition-transform">
-                      <Calendar className="w-8 h-8 text-green-300" />
+                    <div className="p-3 sm:p-4 bg-green-500/30 rounded-2xl group-hover:scale-110 transition-transform">
+                      <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-green-300" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-xl font-bold text-white group-hover:text-green-200 transition-colors mb-2">
+                      <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-green-200 transition-colors mb-1 sm:mb-2">
                         5-Day Forecast Summary
                       </h4>
-                      <p className="text-green-200 text-sm">
+                      <p className="text-green-200 text-xs sm:text-sm">
                         Weekly weather trends, planning advice, and key highlights for the upcoming days
                       </p>
                     </div>
-                    <TrendingUp className="w-6 h-6 text-green-400 group-hover:translate-x-1 transition-transform" />
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-green-400 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
 
-              {/* Divider */}
               <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-slate-600/50"></div>
-                <span className="text-slate-400 text-sm font-medium">OR ASK SPECIFIC QUESTIONS</span>
+                <span className="text-slate-400 text-xs sm:text-sm font-medium">OR ASK SPECIFIC QUESTIONS</span>
                 <div className="flex-1 h-px bg-slate-600/50"></div>
               </div>
 
-              {/* Smart Questions (Secondary) */}
               <div>
                 <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-yellow-400" />
                   Quick Questions
                 </h3>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {smartQuestions.map((question) => (
                     <button
                       key={question.id}
                       onClick={() => handleQuestionClick(question)}
-                      className={`group flex items-center gap-3 p-3 bg-slate-800/40 hover:bg-slate-700/60 rounded-xl transition-all duration-300 border border-slate-600/30 hover:border-${question.color}-500/50 text-left hover:scale-[1.02]`}
+                      className={`group flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-800/40 hover:bg-slate-700/60 rounded-xl transition-all duration-300 border border-slate-600/30 hover:border-${question.color}-500/50 text-left hover:scale-[1.02]`}
                     >
-                      <div className={`p-2 bg-${question.color}-500/20 rounded-lg group-hover:scale-110 transition-transform`}>
+                      <div className={`p-1 sm:p-2 bg-${question.color}-500/20 rounded-lg group-hover:scale-110 transition-transform`}>
                         {question.icon}
                       </div>
                       <div className="flex-1">
-                        <p className="text-white text-sm font-medium group-hover:text-blue-300 transition-colors">
+                        <p className="text-white text-xs sm:text-sm font-medium group-hover:text-blue-300 transition-colors">
                           {question.text}
                         </p>
                       </div>
-                      <Send className="w-4 h-4 text-slate-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                      <Send className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
                     </button>
                   ))}
                 </div>
@@ -265,7 +255,6 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
 
           {activeSection === 'result' && (
             <div className="space-y-6">
-              {/* Header with back button */}
               <div className="flex items-center gap-4">
                 <button
                   onClick={resetToMain}
@@ -275,47 +264,45 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
                 </button>
                 <div className="flex-1">
                   {summaryType && (
-                    <h3 className="text-lg font-semibold text-white">
+                    <h3 className="text-base sm:text-lg font-semibold text-white">
                       {summaryType === 'today' ? "Today's Weather Summary" : "5-Day Forecast Summary"}
                     </h3>
                   )}
                   {selectedQuestion && (
-                    <h3 className="text-lg font-semibold text-white">Question Answer</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-white">Question Answer</h3>
                   )}
                 </div>
               </div>
 
-              {/* Question display (if applicable) */}
               {selectedQuestion && (
-                <div className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-2xl border border-slate-600/30">
-                  <div className={`p-3 bg-${selectedQuestion.color}-500/20 rounded-xl flex-shrink-0`}>
+                <div className="flex items-start gap-4 p-3 sm:p-4 bg-slate-800/50 rounded-2xl border border-slate-600/30">
+                  <div className={`p-2 sm:p-3 bg-${selectedQuestion.color}-500/20 rounded-xl flex-shrink-0`}>
                     {selectedQuestion.icon}
                   </div>
                   <div className="flex-1">
-                    <p className="text-white font-medium">{selectedQuestion.text}</p>
+                    <p className="text-white text-xs sm:text-sm font-medium">{selectedQuestion.text}</p>
                   </div>
                 </div>
               )}
 
-              {/* Result */}
-              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-600/30 min-h-[300px]">
+              <div className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 border border-slate-600/30 min-h-[250px] sm:min-h-[300px]">
                 {loading ? (
-                  <div className="flex items-center justify-center py-12">
+                  <div className="flex items-center justify-center py-8 sm:py-12">
                     <div className="flex items-center gap-3">
-                      <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-400 border-t-transparent"></div>
-                      <span className="text-slate-300 font-medium">
+                      <div className="animate-spin rounded-full h-5 w-5 sm:h-6 sm:w-6 border-2 border-blue-400 border-t-transparent"></div>
+                      <span className="text-slate-300 text-xs sm:text-sm font-medium">
                         {summaryType ? 'Generating summary...' : 'Finding answer...'}
                       </span>
                     </div>
                   </div>
                 ) : summary ? (
                   <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Sparkles className="w-5 h-5 text-yellow-400" />
-                      <h4 className="font-semibold text-white">AI Response</h4>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
+                      <h4 className="font-semibold text-white text-sm sm:text-base">AI Response</h4>
                     </div>
                     <div className="prose prose-invert max-w-none">
-                      <p className="text-slate-200 leading-relaxed whitespace-pre-wrap">
+                      <p className="text-slate-200 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
                         {summary}
                       </p>
                     </div>
@@ -323,11 +310,10 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
                 ) : null}
               </div>
 
-              {/* Action buttons */}
               <div className="flex gap-3">
                 <button
                   onClick={resetToMain}
-                  className="flex-1 px-4 py-3 bg-slate-700/50 hover:bg-slate-600/50 text-white rounded-xl transition-colors font-medium"
+                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 bg-slate-700/50 hover:bg-slate-600/50 text-white rounded-xl transition-colors font-medium text-xs sm:text-sm"
                 >
                   Ask Something Else
                 </button>
@@ -340,14 +326,13 @@ const WeatherAISummary = ({ isOpen, onClose }) => {
   );
 };
 
-// Modal trigger button component
 export const WeatherAssistantButton = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="group flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+      className="group flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-xs sm:text-sm"
     >
-      <MessageCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
       Get AI Insights
     </button>
   );
