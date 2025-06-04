@@ -348,7 +348,7 @@ export const WeatherAssistantButton = ({ onClick }) => {
       className="group flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
     >
       <MessageCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-      Get AI Insight
+      Get AI Insights
     </button>
   );
 };
